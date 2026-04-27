@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compare All Trading Platforms | TradingCompare - 11 Top Brokers Side by Side</title>
+    <meta name="description" content="Compare all 11 top trading platforms including Robinhood, E*TRADE, Charles Schwab, Fidelity, Webull and more. Filter by features, fees, and ratings to find your perfect broker.">
+    <meta name="keywords" content="broker comparison, trading platform comparison, Robinhood vs E*TRADE, best trading platforms 2025">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    
+    <style>
+        .hidden { display: none; }
+        .star-filled { fill: currentColor; }
+    </style>
+</head>
+<body class="py-8 bg-gray-50 min-h-screen">
+    <!-- Header -->
+    <header class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <a href="index.html" class="flex items-center space-x-2">
+                    <i data-lucide="trending-up" class="h-8 w-8 text-blue-600"></i>
+                    <span class="text-2xl font-bold text-gray-900">TradingCompare</span>
+                </a>
+                
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-gray-700 hover:text-blue-600 transition-colors">Home</a>
+                    <a href="comparison.html" class="text-gray-700 hover:text-blue-600 transition-colors">Compare All</a>
+                    <a href="tel:+18557440905" class="flex items-center space-x-2 bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors">
+                        <i data-lucide="phone" class="h-4 w-4"></i>
+                        <span>(855) 744-0905</span>
+                    </a>
+                </nav>
+                
+                <button class="md:hidden" onclick="toggleMobileMenu()">
+                    <i data-lucide="menu" class="h-6 w-6" id="menu-icon"></i>
+                    <i data-lucide="x" class="h-6 w-6 hidden" id="close-icon"></i>
+                </button>
+            </div>
+            
+            <div class="md:hidden py-4 border-t hidden" id="mobile-menu">
+                <div class="flex flex-col space-y-4">
+                    <a href="index.html" class="text-gray-700 hover:text-blue-600 transition-colors">Home</a>
+                    <a href="comparison.html" class="text-gray-700 hover:text-blue-600 transition-colors">Compare All</a>
+                    <a href="tel:+18557440905" class="flex items-center space-x-2 bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors w-fit">
+                        <i data-lucide="phone" class="h-4 w-4"></i>
+                        <span>(855) 744-0905</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-gray-900 mb-4">
+                Complete Broker Comparison 2025
+            </h1>
+            <p class="text-xl text-gray-600 mb-6">
+                Compare all 11 trading platforms side by side to find your perfect match
+            </p>
+            
+            <div class="bg-green-100 border border-green-300 rounded-lg p-4 max-w-2xl mx-auto">
+                <div class="flex items-center justify-center space-x-2">
+                    <i data-lucide="phone" class="h-5 w-5 text-green-600"></i>
+                    <span class="text-green-800 font-semibold">
+                        Need help deciding? Call our experts at 
+                        <a href="tel:+18557440905" class="text-green-700 hover:text-green-900 ml-1">
+                            (855) 744-0905
+                        </a>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filters -->
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+            <div class="flex items-center space-x-2 mb-4">
+                <i data-lucide="filter" class="h-5 w-5 text-gray-600"></i>
+                <h3 class="text-lg font-semibold text-gray-900">Filter & Sort</h3>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                    <label class="flex items-center space-x-2">
+                        <input type="checkbox" id="commission-filter" class="rounded border-gray-300">
+                        <span class="text-sm text-gray-700">Commission-free only</span>
+                    </label>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">
+                        Minimum Deposit
+                    </label>
+                    <select id="deposit-filter" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                        <option value="all">All</option>
+                        <option value="zero">$0 minimum</option>
+                        <option value="low">Under $100</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">
+                        Sort by
+                    </label>
+                    <select id="sort-filter" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                        <option value="rating">Rating</option>
+                        <option value="name">Name</option>
+                        <option value="minDeposit">Min. Deposit</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Comparison Table -->
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Broker
+                            </th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Rating
+                            </th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Commission-Free
+                            </th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Min. Deposit
+                            </th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Key Features
+                            </th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Action
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200" id="comparison-table">
+                        <!-- Table content will be populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Call to Action -->
+        <div class="mt-12 bg-blue-600 text-white rounded-lg p-8 text-center">
+            <h2 class="text-2xl font-bold mb-4">
+                Still Not Sure Which Broker to Choose?
+            </h2>
+            <p class="text-blue-100 mb-6">
+                Our trading experts can help you find the perfect platform based on your specific needs and goals.
+            </p>
+            <a href="tel:+18557440905" class="bg-green-600 text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-green-700 transition-colors inline-flex items-center space-x-2">
+                <i data-lucide="phone" class="h-5 w-5"></i>
+                <span>Call (855) 744-0905 - Free Consultation</span>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // All brokers data
+        const allBrokers = [
+            {
+                id: 1,
+                name: "Robinhood",
+                slug: "robinhood",
+                logo: "https://images.pexels.com/photos/7567434/pexels-photo-7567434.jpeg?auto=compress&cs=tinysrgb&w=400",
+                rating: 4.2,
+                commissionFree: true,
+                minDeposit: 0,
+                features: ["Commission-free trades", "Fractional shares", "Crypto trading", "Options trading"],
+                regulatedBy: ["SEC", "FINRA", "SIPC"]
+            },
+            {
+                id: 2,
+                name: "E*TRADE",
+                slug: "etrade",
+                logo: "https://images.pexels.com/photos/7567521/pexels-photo-7567521.jpeg?auto=compress&cs=tinysrgb&w=400",
+                rating: 4.5,
+                commissionFree: true,
+                minDeposit: 0,
+                features: ["Advanced trading platform", "Extensive research", "Options trading", "Retirement planning"],
+                regulatedBy: ["SEC", "FINRA", "SIPC"]
+            },
+            {
+                id: 3,
+                name: "Charles Schwab",
+                slug: "charles-schwab",
+                logo: "https://images.pexels.com/photos/7567465/pexels-photo-7567465.jpeg?auto=compress&cs=tinysrgb&w=400",
+                rating: 4.6,
+                commissionFree: true,
+                minDeposit: 0,
+                features: ["No minimum balance", "Excellent customer service", "Branch locations", "Robo-advisor"],
+                regulatedBy: ["SEC", "FINRA", "SIPC"]
+            },
+            {
+                id: 4,
+                name: "Fidelity",
+                slug: "fidelity",
+                logo: "https://images.pexels.com/photos/7567443/pexels-photo-7567443.jpeg?auto=compress&cs=tinysrgb&w=400",
+                rating: 4.7,
+                commissionFree: true,
+                minDeposit: 0,
+                features: ["Zero expense ratio index funds", "Extensive research", "Retirement planning", "Fractional shares"],
+                regulatedBy: ["SEC", "FINRA", "SIPC"]
+            },
+            {
+                id: 5,
+                name: "Webull",
+                slug: "webull",
+                logo: "https://images.pexels.com/photos/7567478/pexels-photo-7567478.jpeg?auto=compress&cs=tinysrgb&w=400",
+                rating: 4.3,
+                commissionFree: true,
+                minDeposit: 0,
+                features: ["Advanced charting", "Extended trading hours", "Paper trading", "Crypto trading"],
+                regulatedBy: ["SEC", "FINRA", "SIPC"]
+            },
+            {
+                id: 6,
+                name: "Interactive Brokers",
+                slug: "interactive-brokers",
+                logo: "https://images.pexels.com/photos/7567512/pexels-photo-7567512.jpeg?auto=compress&cs=tinysrgb&w=400",
+                rating: 4.4,
+                commissionFree: false,
+                minDeposit: 0,
+                features: ["Global markets", "Professional tools", "Low margin rates", "Advanced orders"],
+                regulatedBy: ["SEC", "FINRA", "SIPC", "FCA", "IIROC"]
+            },
+            {
+                id: 7,
+                name: "M1 Finance",
+                slug: "m1-finance",
+                logo: "https://images.pexels.com/photos/7567489/pexels-photo-7567489.jpeg?auto=compress&cs=tinysrgb&w=400",
+                rating: 4.1,
+                commissionFree: true,
+                minDeposit: 0,
+                features: ["Automated investing", "Portfolio pies", "Fractional shares", "Borrowing against portfolio"],
+                regulatedBy: ["SEC", "FINRA", "SIPC"]
+            },
+            {
+                id: 8,
+                name: "SoFi Invest",
+                slug: "sofi-invest",
+                logo: "https://images.pexels.com/photos/7567498/pexels-photo-7567498.jpeg?auto=compress&cs=tinysrgb&w=400",
+                rating: 4.0,
+                commissionFree: true,
+                minDeposit: 0,
+                features: ["Member benefits", "Financial planning", "Robo-advisor", "Crypto trading"],
+                regulatedBy: ["SEC", "FINRA", "SIPC"]
+            },
+            {
+                id: 9,
+                name: "Ally Invest",
+                slug: "ally-invest",
+                logo: "https://images.pexels.com/photos/7567456/pexels-photo-7567456.jpeg?auto=compress&cs=tinysrgb&w=400",
+                rating: 3.9,
+                commissionFree: true,
+                minDeposit: 0,
+                features: ["Banking integration", "Robo-advisor", "Options trading", "Research tools"],
+                regulatedBy: ["SEC", "FINRA", "SIPC"]
+            },
+            {
+                id: 10,
+                name: "Firstrade",
+                slug: "firstrade",
+                logo: "https://images.pexels.com/photos/7567501/pexels-photo-7567501.jpeg?auto=compress&cs=tinysrgb&w=400",
+                rating: 4.2,
+                commissionFree: true,
+                minDeposit: 0,
+                features: ["No commissions", "International trading", "Options trading", "Mutual funds"],
+                regulatedBy: ["SEC", "FINRA", "SIPC"]
+            },
+            {
+                id: 11,
+                name: "Merrill Edge",
+                slug: "merrill-edge",
+                logo: "https://images.pexels.com/photos/7567487/pexels-photo-7567487.jpeg?auto=compress&cs=tinysrgb&w=400",
+                rating: 4.3,
+                commissionFree: true,
+                minDeposit: 0,
+                features: ["Bank of America integration", "Research tools", "Preferred rewards", "Financial advisors"],
+                regulatedBy: ["SEC", "FINRA", "SIPC"]
+            }
+        ];
+
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuIcon = document.getElementById('menu-icon');
+            const closeIcon = document.getElementById('close-icon');
+            
+            mobileMenu.classList.toggle('hidden');
+            menuIcon.classList.toggle('hidden');
+            closeIcon.classList.toggle('hidden');
+        }
+
+        // Filter and sort functionality
+        function filterAndSortBrokers() {
+            const commissionFilter = document.getElementById('commission-filter').checked;
+            const depositFilter = document.getElementById('deposit-filter').value;
+            const sortBy = document.getElementById('sort-filter').value;
+
+            let filteredBrokers = allBrokers.filter(broker => {
+                if (commissionFilter && !broker.commissionFree) return false;
+                if (depositFilter === 'zero' && broker.minDeposit > 0) return false;
+                if (depositFilter === 'low' && broker.minDeposit > 100) return false;
+                return true;
+            });
+
+            filteredBrokers.sort((a, b) => {
+                if (sortBy === 'rating') return b.rating - a.rating;
+                if (sortBy === 'minDeposit') return a.minDeposit - b.minDeposit;
+                if (sortBy === 'name') return a.name.localeCompare(b.name);
+                return 0;
+            });
+
+            populateComparisonTable(filteredBrokers);
+        }
+
+        // Populate comparison table
+        function populateComparisonTable(brokers) {
+            const tableBody = document.getElementById('comparison-table');
+            
+            tableBody.innerHTML = brokers.map((broker, index) => `
+                <tr class="${index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}">
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="flex items-center">
+                            <img src="${broker.logo}" alt="${broker.name}" class="h-10 w-10 rounded object-cover mr-3">
+                            <div>
+                                <div class="text-sm font-medium text-gray-900">${broker.name}</div>
+                                <div class="text-sm text-gray-500">Regulated by ${broker.regulatedBy.join(', ')}</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="flex items-center">
+                            <i data-lucide="star" class="h-4 w-4 text-yellow-400 star-filled mr-1"></i>
+                            <span class="text-sm font-semibold">${broker.rating}</span>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        ${broker.commissionFree ? 
+                            '<i data-lucide="check" class="h-5 w-5 text-green-500"></i>' : 
+                            '<i data-lucide="x" class="h-5 w-5 text-red-500"></i>'
+                        }
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <span class="text-sm font-medium">
+                            $${broker.minDeposit === 0 ? '0' : broker.minDeposit.toLocaleString()}
+                        </span>
+                    </td>
+                    <td class="px-6 py-4">
+                        <div class="text-sm text-gray-900">
+                            ${broker.features.slice(0, 2).map(feature => `<div class="mb-1">• ${feature}</div>`).join('')}
+                            ${broker.features.length > 2 ? `<div class="text-gray-500">+${broker.features.length - 2} more</div>` : ''}
+                        </div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <a href="${broker.slug}.html" class="bg-blue-600 text-white px-4 py-2 rounded text-sm font-medium hover:bg-blue-700 transition-colors">
+                            View Details
+                        </a>
+                    </td>
+                </tr>
+            `).join('');
+            
+            // Re-initialize icons for the new content
+            lucide.createIcons();
+        }
+
+        // Event listeners
+        document.getElementById('commission-filter').addEventListener('change', filterAndSortBrokers);
+        document.getElementById('deposit-filter').addEventListener('change', filterAndSortBrokers);
+        document.getElementById('sort-filter').addEventListener('change', filterAndSortBrokers);
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            filterAndSortBrokers();
+        });
+    </script>
+</body>
+</html>
